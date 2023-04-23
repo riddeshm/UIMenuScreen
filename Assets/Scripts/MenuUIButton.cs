@@ -12,7 +12,6 @@ public class MenuUIButton : MonoBehaviour, IPointerDownHandler
     public Sprite iconSprite;
     public string title;
 
-    private HorizontalLayoutGroup horizontalLayoutGroup;
     private LayoutElement layoutElement;
     private RectTransform rectTransform;
     private GameObject icon;
@@ -31,7 +30,6 @@ public class MenuUIButton : MonoBehaviour, IPointerDownHandler
 
     private void Start()
     {
-        horizontalLayoutGroup = GetComponentInParent<HorizontalLayoutGroup>();
         layoutElement = GetComponent<LayoutElement>();
         rectTransform = GetComponent<RectTransform>();
         iconSprite = GetComponentsInChildren<Image>()[1].sprite;

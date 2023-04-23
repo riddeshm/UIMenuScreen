@@ -36,7 +36,6 @@ public class MenuUIButtonOverlay : MonoBehaviour
         SetSpriteAndText(menuUIButton.iconSprite, menuUIButton.title);
         while (Vector3.Distance(transform.localPosition, menuUIButton.transform.localPosition) > 0.1)
         {
-            Debug.Log(Vector3.Distance(transform.localPosition, menuUIButton.transform.localPosition));
             transform.localPosition = Vector3.Lerp(transform.localPosition, menuUIButton.transform.localPosition, 0.3f);
             yield return null;
         }
