@@ -10,6 +10,7 @@ public class MenuUIButton : MonoBehaviour, IPointerDownHandler
     public Action<MenuUIButton> OnClicked;
     public bool isSelected;
     public Sprite iconSprite;
+    public string title;
 
     private HorizontalLayoutGroup horizontalLayoutGroup;
     private LayoutElement layoutElement;
@@ -33,7 +34,7 @@ public class MenuUIButton : MonoBehaviour, IPointerDownHandler
         horizontalLayoutGroup = GetComponentInParent<HorizontalLayoutGroup>();
         layoutElement = GetComponent<LayoutElement>();
         rectTransform = GetComponent<RectTransform>();
-        iconSprite = GetComponent<Image>().sprite;
+        iconSprite = GetComponentsInChildren<Image>()[1].sprite;
         icon = transform.GetChild(0).gameObject;
         StartCoroutine(GetWidth());
     }
