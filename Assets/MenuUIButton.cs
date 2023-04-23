@@ -7,21 +7,34 @@ using UnityEngine.UI;
 
 public class MenuUIButton : MonoBehaviour, IPointerDownHandler
 {
-    public Action OnClicked;
+    public Action<MenuUIButton> OnClicked;
     public bool isSelected;
+    public Sprite iconSprite;
 
-    HorizontalLayoutGroup horizontalLayoutGroup;
-    LayoutElement layoutElement;
-    RectTransform rectTransform;
-    float defaultWidth;
-    float selectedWidth;
-    float widthMultiplier = 2f;
+    private HorizontalLayoutGroup horizontalLayoutGroup;
+    private LayoutElement layoutElement;
+    private RectTransform rectTransform;
+    private GameObject icon;
+    private float defaultWidth;
+    private float selectedWidth;
+    private float widthMultiplier = 2f;
+
+
+    public float SelectedWidth
+    {
+        get
+        {
+            return selectedWidth;
+        }
+    }
 
     private void Start()
     {
         horizontalLayoutGroup = GetComponentInParent<HorizontalLayoutGroup>();
         layoutElement = GetComponent<LayoutElement>();
         rectTransform = GetComponent<RectTransform>();
+        iconSprite = GetComponent<Image>().sprite;
+        icon = transform.GetChild(0).gameObject;
         StartCoroutine(GetWidth());
     }
 
@@ -53,12 +66,14 @@ public class MenuUIButton : MonoBehaviour, IPointerDownHandler
             layoutElement.minWidth = Mathf.Lerp(layoutElement.minWidth, 0, 0.5f);
             yield return null;
         }
+        icon.SetActive(true);
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        OnClicked?.Invoke();
+        OnClicked?.Invoke(this);
         isSelected = true;
         StartCoroutine(SetSelectedWidth());
+        icon.SetActive(false);
     }
 }
