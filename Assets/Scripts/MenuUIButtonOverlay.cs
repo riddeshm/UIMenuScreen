@@ -16,9 +16,16 @@ public class MenuUIButtonOverlay : MonoBehaviour
         rectransform = GetComponent<RectTransform>();
     }
 
+    private void SetSpriteAndText(Sprite _sprite, string _title)
+    {
+        iconImage.sprite = _sprite;
+        titleText.text = _title;
+    }
+
     public IEnumerator SetWidthAndPosition(MenuUIButton menuUIButton)
     {
         yield return null;
+        SetSpriteAndText(menuUIButton.iconSprite, menuUIButton.title);
         yield return null;
         rectransform.sizeDelta = new Vector2(menuUIButton.SelectedWidth, rectransform.sizeDelta.y);
         transform.position = menuUIButton.transform.position;
@@ -26,8 +33,7 @@ public class MenuUIButtonOverlay : MonoBehaviour
 
     public IEnumerator LerpToSelectedButtonPosition(MenuUIButton menuUIButton)
     {
-        iconImage.sprite = menuUIButton.iconSprite;
-        titleText.text = menuUIButton.title;
+        SetSpriteAndText(menuUIButton.iconSprite, menuUIButton.title);
         while (Vector3.Distance(transform.localPosition, menuUIButton.transform.localPosition) > 0.1)
         {
             Debug.Log(Vector3.Distance(transform.localPosition, menuUIButton.transform.localPosition));
